@@ -34,6 +34,8 @@ if slide_option:
     st.write('Filter records >=',slide_option)
     filter_data=df[df['score']>=slide_option]
     st.dataframe(filter_data)
+else:
+    st.write('No Record Found')
 
 # data=pd.read_csv('student_score.csv')
 # st.write(data)
