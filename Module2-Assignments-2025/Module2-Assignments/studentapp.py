@@ -29,21 +29,23 @@ if st.button('Add Student'):
         st.error("Please enter both name and score!")
 st.write('student record')
 df
-slide_option=st.slider('Filter by score ',min_value=30,max_value=100)
-if slide_option:
-    st.write('Filter records >=',slide_option)
-    filter_data=df[df['score']>=slide_option]
-    st.dataframe(filter_data)
-
-# data=pd.read_csv('student_score.csv')
-# st.write(data)
-# Clear the list button
-# if st.button("Clear Student List"):
-#     st.session_state.Students.clear()
-#     st.warning("Student list cleared.")
-
-    
-# st.write("### Student List:")
-# for student in st.session_state.Students:
-#     st.write(f"**{student['name']}** - Score: {student['score']}")
-    
+slide_option=st.slider('Filter by score ',min_value=0,max_value=100)
+# mininmum_score=50
+# if slide_option>=mininmum_score:
+#     st.write('Filter records >=',slide_option)
+#     st.write('Nice work')
+#     filter_data=df[df['score']>=mininmum_score]
+#     st.dataframe(filter_data)
+# else:
+#     st.write('No records found')
+minimum_score = 50
+filtered_students = []
+for student, student_score in zip(st.session_state.student_name, st.session_state.student_score):
+    if slide_option >= minimum_score & student_score >= minimum_score:
+        filtered_students.append((student, student_score))
+        
+        # st.write(filtered_students)
+        
+    else:
+        st.write('No records found')
+st.write(pd.DataFrame(filtered_students,columns=['name','score']))
